@@ -1,0 +1,6 @@
+docker run -p 8081:8080 -e ADMINER_DEFAULT_SERVER=mysql adminer
+
+host: 'nkpl8b2jg68m87ht.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
+user: 'ns0xtj5joo1dl0j9',
+password: 'oashevj1wpkaemmg',
+database: 'h2eeztdsfwtqbwbf'

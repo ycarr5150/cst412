@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>IT Assets Website</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+</head>
+
+<body>
+    <p>Item <input type="text" name="item-search" id="item-search"></p>
+    <div class="tab">
+        <button class="tablinks" onclick="openTab(event, 'AssetDetail')">Asset Details</button>
+        <button class="tablinks" onclick="openTab(event, 'Comment')">Comment</button>
+    </div>
+    <div id="AssetDetail" class="tabcontent">
+        <br><br>
+        <div class="clearfix">
+            <div class="container">
+                <table>
+                    <tr>
+                        <td>Category</td>
+                        <td>
+                            <select id="category">
+                                <option value="">Select One</option>
+                                <option value="idk">IDK</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Manufacturer</td>
+                        <td><input type="text" name="category" id="asset-details"></td>
+                    </tr>
+                    <tr>
+                        <td>Model</td>
+                        <td><input type="text" name="category" id="asset-details"></td>
+                    </tr>
+                    <tr>
+                        <td>Acquired Date</td>
+                        <td><input type="text" name="category" id="asset-details"></td>
+                    </tr>
+                    <tr>
+                        <td>Purchase Price</td>
+                        <td><input type="text" name="category" id="asset-details"></td>
+                    </tr>
+                    <tr>
+                        <td>Current Value</td>
+                        <td><input type="text" name="category" id="asset-details"></td>
+                    </tr>
+                    <tr>
+                        <td>Condition</td>
+                        <td><input type="text" name="category" id="asset-details"></td>
+                    </tr>
+                    <tr>
+                        <td>Warrenty Expiration Date</td>
+                        <td><input type="text" name="category" id="asset-details"></td>
+                    </tr>
+                    <tr>
+                        <td>Location</td>
+                        <td><input type="text" name="category" id="asset-details"></td>
+                    </tr>
+                    <tr>
+                        <td>Retired Date</td>
+                        <td><input type="text" name="category" id="asset-details"></td>
+                    </tr>
+                    <tr>
+                        <td>Description</td>
+                        <td><input type="text" name="category" id="asset-details"></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="container">
+                Hello
+            </div>
+        </div>
+    </div>
+    <div id="Comment" class="tabcontent">
+        <h3>Paris</h3>
+    </div>
+
+    <script>
+        function openTab(evt, tab) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tab).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+    </script>
+</body>
+
+</html>
