@@ -17,12 +17,14 @@
   },
   "homepage": "https://github.com/ycarr5150/cst412#readme",
   "dependencies": {
+    "cookie-parser": "^1.4.4",
     "debug": "^4.1.1",
-    "ejs": "^3.0.1",
-    "ejs-lint": "^0.3.0",
+    "ejs": "^2.7.1",
     "express": "^4.17.1",
+    "express-session": "^1.17.0",
     "morgan": "^1.9.1",
     "mysql": "^2.17.1",
+    "nodemon": "^2.0.1",
     "request": "^2.88.0"
   }
 }

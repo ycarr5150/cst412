@@ -1,0 +1,120 @@
+<% include partials/header %>
+
+<a href="/" id="cancel-asset">Cancel</a>
+<div class="tab">
+    <button class="tablinks">Asset Details</button>
+</div>
+<div id="AssetDetail" class="tabcontent">
+    <br><br>
+    <form>
+        <div class="clearfix">
+            <div class="container">
+                <table>
+                    <tr>
+                        <td>Category</td>
+                        <td>
+                            <select id="category">
+                                <option value="">Select One</option>
+                                <option value="1">(1) Category</option>
+                                <option value="2">(2) Category</option>
+                                <option value="3">(3) Category</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Manufacturer</td>
+                        <td><input type="text" id="manufacturer" class="asset-details"></td>
+                    </tr>
+                    <tr>
+                        <td>Model</td>
+                        <td><input type="text" id="model" class="asset-details"></td>
+                    </tr>
+                    <tr>
+                        <td>Serial Number</td>
+                        <td><input type="text" id="serial-number" class="asset-details"></td>
+                    </tr>
+                    <tr>
+                        <td>Acquired Date</td>
+                        <td><input type="date" id="acquired-date" class="input-date"></td>
+                    </tr>
+                    <tr>
+                        <td>Purchase Price</td>
+                        <td><input type="text" id="purchase-price" class="asset-details" placeholder="$0.00"></td>
+                    </tr>
+                    <tr>
+                        <td>Condition</td>
+                        <td>
+                            <select id="condition">
+                                <option value="">Select One</option>
+                                <option value="cond-new">(1) New</option>
+                                <option value="cond-new-open">(2) New - Open Box</option>
+                                <option value="cond-manu">(3) Manufactured Refurbished</option>
+                                <option value="cond-used">(4) Used</option>
+                                <option value="cond-not-working">(5) For Parts or Not Working</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Warrenty Expiration Date</td>
+                        <td><input type="date" id="warrenty-expiration" class="input-date"></td>
+                    </tr>
+                    <tr>
+                        <td>Location</td>
+                        <td>
+                            <select id="location">
+                                <option value="">Select One</option>
+                                <option value="main-office">Main Office</option>
+                                <option value="not-located">Not Located Yet</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Retired Date</td>
+                        <td><input type="text" id="retired-date" class="asset-details"></td>
+                    </tr>
+                    <tr>
+                        <td>Description</td>
+                        <td><input type="text" id="description" class="asset-details" placeholder="Optional..."></td>
+                    </tr>
+                    <tr>
+                        <td>Comments</td>
+                        <td><input type="text" id="comments-box" class="asset-details" placeholder="Optional..."></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="container">
+                Hello
+            </div>
+        </div><br>
+        <div class="buttons">
+            <button type="submit" class="deco-button" id="submit-button">Submit</button>
+            <button type="submit" class="deco-button" id="reset-button">Reset</button>
+        </div>
+    </form>
+    <p id="message"></p>
+</div>
+
+<div id="Comment" class="tabcontent">
+    <h3>Paris</h3>
+</div>
+
+<script>
+function openTab(evt, tab) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(tab).style.display = "block";
+}
+
+    $(document).ready(function() {
+        openTab(event, 'AssetDetail'); 
+    }); 
+</script>
+    
+<% include partials/footer %>
