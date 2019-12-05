@@ -25,21 +25,23 @@
                 <th>Description</th>
                 <th>Comments</th>
             </tr>
+            {{#each item}}
             <tr>
-                <td>{{asset.id}}</td>
-                <td>{{asset.category}}</td>
-                <td>{{asset.manufacturer}}</td>
-                <td>{{asset.model}}</td>
-                <td>{{asset.serial}}</td>
-                <td>{{asset.acquired}}</td>
-                <td>{{asset.price}}</td>
-                <td>{{asset.cond}}</td>
-                <td>{{asset.warrenty}}</td>
-                <td>{{asset.location}}</td>
-                <td>{{asset.retired}}</td>
-                <td>{{asset.descrip}}</td>
-                <td>{{asset.comments}}</td>
-            </tr>
+                    <td>{{this.id}}</td>
+                    <td>{{this.category}}</td>
+                    <td>{{this.manufacturer}}</td>
+                    <td>{{this.model}}</td>
+                    <td>{{this.serial}}</td>
+                    <td>{{this.acquired}}</td>
+                    <td>{{this.price}}</td>
+                    <td>{{this.cond}}</td>
+                    <td>{{this.warrenty}}</td>
+                    <td>{{this.location}}</td>
+                    <td>{{this.retired}}</td>
+                    <td>{{this.description}}</td>
+                    <td>{{this.comments}}</td>
+                </tr>
+            {{/each}}
         </table>
         
     <br><br><hr><br>

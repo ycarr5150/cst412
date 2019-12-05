@@ -1,5 +1,3 @@
-let search; 
-
 $('#submit-button').on("click", function(e) {
     e.preventDefault(); // Do not submit until I am ready
     
@@ -35,16 +33,4 @@ $('#submit-button').on("click", function(e) {
             console.log("error: ", xhr.responseText); 
         }
     });
-}); 
-
-$("#edit-asset-button").on("click", function() {
-    $.ajax({
-        type: "GET", 
-        url: "/show-asset", 
-        datatype: "json", 
-        contentType: "application/json",
-        data: JSON.stringify({
-            "id": $('#id-number-to-edit').val()
-        })
-    }); 
 }); 

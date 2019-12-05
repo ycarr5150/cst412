@@ -9,8 +9,6 @@ app.use(cookieParser());
 
 app.use(express.static("public")); 
 
-let asset; 
-
 // routes
 app.get('/', function(req, res, next) {
     const connection = mysql.createConnection({
@@ -77,7 +75,6 @@ app.post('/new-asset', function(req, res, next) {
 });
 
 app.get('/show-asset', function(req, res, next) {
-    console.log(req.body.id); 
     const connection = mysql.createConnection({
         host: 'nkpl8b2jg68m87ht.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
         user: 'ns0xtj5joo1dl0j9',
@@ -89,14 +86,16 @@ app.get('/show-asset', function(req, res, next) {
     
     connection.query(
         `SELECT * FROM assets
-        WHERE id = 5`, function(error, results, fields) {
+        WHERE id = 3`, function(error, results, fields) {
         if (error) throw error;
 
-        res.render('show-asset.hbs'); 
+        res.render('show-asset.hbs', {
+            item: results
+        });
     });
     
     connection.end(); 
-});
+}); 
 
 // server listener 
 app.listen(process.env.PORT, process.env.IP, function() {
