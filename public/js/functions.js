@@ -37,6 +37,11 @@ $('#submit-button').on("click", function(e) {
 
 $('#update-button').on("click", function(e) {
     e.preventDefault(); // Do not submit until I am ready
+    let checked = "no"; 
+    
+    if($("#retire-box").is(":checked")) {
+        checked = "yes"; 
+    }
     
     $.ajax({
         type: "POST",
@@ -44,6 +49,7 @@ $('#update-button').on("click", function(e) {
         dataType: "json",
         contentType: "application/json",
         data: JSON.stringify({
+            "assetID": $("#asset-id").val(), 
             "category" : $('#category').val(), 
             "manufacturer" : $('#manufacturer').val(), 
             "model" : $('#model').val(), 
@@ -54,7 +60,8 @@ $('#update-button').on("click", function(e) {
             "warrenty" : $('#warrenty-expiration').val(), 
             "located" : $('#location').val(), 
             "descrip" : $('#description-box').val(), 
-            "comment" : $('#comment-box').val()
+            "comment" : $('#comment-box').val(),
+            "retire" : checked
         }),
         success: function(result, status) {
             if (result.successful) {

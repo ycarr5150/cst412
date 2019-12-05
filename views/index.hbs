@@ -15,7 +15,7 @@
         <br>Enter ID Number to Edit Asset: <input type="text" id="id">
         <button type="submit" class="deco-button" id="edit-asset-button">Edit Asset</button>
         <br><br>
-        <p id="error-message"></p>
+        <p id="message"></p>
         
         <!-- Display assets here -->
         <table>
@@ -30,6 +30,8 @@
                 <th>Condition</th>
                 <th>Warrenty Expiration</th>
                 <th>Located</th>
+                <th>Description</th>
+                <th>Comment</th>
             </tr>
             {{#each item}}
                 <tr>
@@ -43,6 +45,8 @@
                     <td>{{this.cond}}</td>
                     <td>{{this.warrenty}}</td>
                     <td>{{this.location}}</td>
+                    <td>{{this.description}}</td>
+                    <td>{{this.comments}}</td>
                 </tr>
             {{/each}}
         </table>

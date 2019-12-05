@@ -20,6 +20,7 @@
                         <table>
                             {{#each item}}
                             <tr>
+                                <span id="asset-id" style="display: none;" value={{this.id}}></span>
                                 <td>Category</td>
                                 <td>
                                     <select id="category">
@@ -89,7 +90,7 @@
                             {{/each}}
                             <tr>
                                 <td>Retire?</td>
-                                <td><input type="checkbox" name="retire" class="checkbox" value="yes">Yes</td>
+                                <td><input type="checkbox" id="retire-box" class="checkbox">Yes</td>
                             </tr>
                         </table>
                     </div>

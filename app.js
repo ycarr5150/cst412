@@ -124,6 +124,35 @@ app.post('/show-asset', function(req, res, next) {
     let successful = false;
     let message = ""; 
     
+    if(req.body.retire == "yes") {
+        successful = true; 
+        message = "succesful deletion"; 
+        
+        const connection = mysql.createConnection({
+            host: 'nkpl8b2jg68m87ht.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
+            user: 'ns0xtj5joo1dl0j9',
+            password: 'oashevj1wpkaemmg',
+            database: 'h2eeztdsfwtqbwbf'
+        });
+        
+        connection.connect();
+        
+        connection.query(
+        `DELETE FROM assets 
+        WHERE id = ${req.session.idNumber};`
+        , function(error, results, fields) {
+            if (error) throw error;
+        });
+        
+        connection.end(); 
+        
+        // Return success or failure
+        res.json({
+            successful: successful,
+            message: message
+        });
+    }
+    
     if(req.body.category == "" || req.body.manufacturer == "" || req.body.model == "" || req.body.serial == "" || req.body.acquired == ""
         || req.body.paid == "" || req.body.condition == "" || req.body.warrenty == "" || req.body.located == "") {
         message = "Missing information above. Please fill out to continue"; 
@@ -138,15 +167,15 @@ app.post('/show-asset', function(req, res, next) {
         });
         
         connection.connect();
-        // connection.query(
-        // `INSERT INTO assets 
-        // (category, manufacturer, model, serial, acquired, price, cond, warrenty, location, retired, description, comments)
-        // VALUES ('${req.body.category}', '${req.body.manufacturer}', '${req.body.model}', '${req.body.serial}', '${req.body.acquired}', 
-        // '${req.body.paid}', '${req.body.condition}', '${req.body.warrenty}', '${req.body.located}', 'N', '${req.body.descrip}', 
-        // '${req.body.comment}')`
-        // , function(error, results, fields) {
-        //     if (error) throw error;
-        // });
+        connection.query(
+        `UPDATE assets
+        SET category = '${req.body.category}', manufacturer = '${req.body.manufacturer}', model = '${req.body.model}', serial = '${req.body.serial}', 
+        acquired = '${req.body.acquired}', price = '${req.body.paid}', cond = '${req.body.condition}', warrenty = '${req.body.warrenty}', 
+        location = '${req.body.located}', retired = 'N', description = '${req.body.descrip}', comments =  '${req.body.comment}'
+        WHERE id = ${req.session.idNumber};`
+        , function(error, results, fields) {
+            if (error) throw error;
+        });
         
         connection.end(); 
     }
