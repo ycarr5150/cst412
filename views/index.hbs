@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>IT Assets Inventory</title>
+        <link rel="stylesheet" href="/css/styles.css" />
+        <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+    </head>
+    <body>
+        <h2><i>l33t h@x0r5</i> Asset Inventory</h2>
+        
+        <a href="/new-asset"> 
+            <button type="submit" class="deco-button" id="new-asset-button">Add New Asset</button>
+        </a>
+        
+        <br>Enter ID Number to Edit Asset: <input type="text" id="id-number-to-edit">
+        <a href="/show-asset"> 
+            <button type="submit" class="deco-button" id="edit-asset-button">Edit Asset</button>
+        </a><br><br>
+        <p id="error-message"></p>
+        
+        <!-- Display assets here -->
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Category</th>
+                <th>Manufacturer</th>
+                <th>Model</th>
+                <th>Serial Number</th>
+                <th>Acquired Date</th>
+                <th>Purchase Price</th>
+                <th>Condition</th>
+                <th>Warrenty Expiration</th>
+                <th>Located</th>
+            </tr>
+            {{#each item}}
+                <tr>
+                    <td>{{this.id}}</td>
+                    <td>{{this.category}}</td>
+                    <td>{{this.manufacturer}}</td>
+                    <td>{{this.model}}</td>
+                    <td>{{this.serial}}</td>
+                    <td>{{this.acquired}}</td>
+                    <td>{{this.price}}</td>
+                    <td>{{this.cond}}</td>
+                    <td>{{this.warrenty}}</td>
+                    <td>{{this.location}}</td>
+                </tr>
+            {{/each}}
+        </table>
+    
+        <br><br><hr><br>
+        <footer>
+                CST412: Net Admin<br>
+                &copy; 2019. l33t h@x0r5<br>
+                Disclaimer: The information in this page might be inaccurate.<br>
+                It is used for academic purposes only.<br><br>
+        </footer>
+        <script SRC="/js/functions.js"></script>
+    </body>
+</html> 

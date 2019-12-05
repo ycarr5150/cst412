@@ -1,16 +1,5 @@
-function openTab(evt, tab) {
-    var i, tabcontent, tablinks;
-    tabcontent = document.getElementsByClassName("tabcontent");
-    for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
-    }
-    tablinks = document.getElementsByClassName("tablinks");
-    for (i = 0; i < tablinks.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" active", "");
-    }
-    document.getElementById(tab).style.display = "block";
-}
-    
+let search; 
+
 $('#submit-button').on("click", function(e) {
     e.preventDefault(); // Do not submit until I am ready
     
@@ -23,13 +12,14 @@ $('#submit-button').on("click", function(e) {
             "category" : $('#category').val(), 
             "manufacturer" : $('#manufacturer').val(), 
             "model" : $('#model').val(), 
+            "serial" :$('#serial-number').val(), 
             "acquired" : $('#acquired-date').val(), 
             "paid" : $('#purchase-price').val(), 
             "condition" : $('#condition').val(), 
             "warrenty" : $('#warrenty-expiration').val(), 
             "located" : $('#location').val(), 
-            "retired" : $('#retired-date').val(), 
-            "description" : $('#description').val()
+            "descrip" : $('#description-box').val(), 
+            "comment" : $('#comment-box').val()
         }),
         success: function(result, status) {
             if (result.successful) {
@@ -45,4 +35,16 @@ $('#submit-button').on("click", function(e) {
             console.log("error: ", xhr.responseText); 
         }
     });
+}); 
+
+$("#edit-asset-button").on("click", function() {
+    $.ajax({
+        type: "GET", 
+        url: "/show-asset", 
+        datatype: "json", 
+        contentType: "application/json",
+        data: JSON.stringify({
+            "id": $('#id-number-to-edit').val()
+        })
+    }); 
 }); 
