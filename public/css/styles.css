@@ -5,7 +5,7 @@ body {
     font-size: 18px;
 }
 
-#id-number-to-edit {
+#id {
     width: 5%;
     padding: 5px;
     font-size: 15px;
@@ -110,4 +110,8 @@ footer {
 
 #cancel-asset:after {
     color: green;
+}
+
+.checkbox {
+    margin-left: 30px;
 }

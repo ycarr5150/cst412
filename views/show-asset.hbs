@@ -9,42 +9,99 @@
         <h2><i>l33t h@x0r5</i> Asset Inventory</h2>
         
         <a href="/" id="cancel-asset">Back</a>
-        <table>
-            <tr>
-                <th>ID</th>
-                <th>Category</th>
-                <th>Manufacturer</th>
-                <th>Model</th>
-                <th>Serial Number</th>
-                <th>Acquired Date</th>
-                <th>Purchase Price</th>
-                <th>Condition</th>
-                <th>Warrenty Expiration</th>
-                <th>Located</th>
-                <th>Retired</th>
-                <th>Description</th>
-                <th>Comments</th>
-            </tr>
-            {{#each item}}
-            <tr>
-                    <td>{{this.id}}</td>
-                    <td>{{this.category}}</td>
-                    <td>{{this.manufacturer}}</td>
-                    <td>{{this.model}}</td>
-                    <td>{{this.serial}}</td>
-                    <td>{{this.acquired}}</td>
-                    <td>{{this.price}}</td>
-                    <td>{{this.cond}}</td>
-                    <td>{{this.warrenty}}</td>
-                    <td>{{this.location}}</td>
-                    <td>{{this.retired}}</td>
-                    <td>{{this.description}}</td>
-                    <td>{{this.comments}}</td>
-                </tr>
-            {{/each}}
-        </table>
+        <div class="tab">
+            <button class="tablinks">Asset Details</button>
+        </div>
+        <div id="AssetDetail" class="tabcontent">
+            <br><br>
+            <form>
+                <div class="clearfix">
+                    <div class="container">
+                        <table>
+                            {{#each item}}
+                            <tr>
+                                <td>Category</td>
+                                <td>
+                                    <select id="category">
+                                        <option value="">Select One</option>
+                                        <option value="Computer">Computer</option>
+                                        <option value="Router">Router</option>
+                                        <option value="Unknwon">Unknown</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Manufacturer</td>
+                                <td><input type="text" id="manufacturer" class="asset-details" value={{this.manufacturer}}></td>
+                            </tr>
+                            <tr>
+                                <td>Model</td>
+                                <td><input type="text" id="model" class="asset-details" value={{this.model}}></td>
+                            </tr>
+                            <tr>
+                                <td>Serial Number</td>
+                                <td><input type="text" id="serial-number" class="asset-details" value={{this.serial}}></td>
+                            </tr>
+                            <tr>
+                                <td>Acquired Date</td>
+                                <td><input type="date" id="acquired-date" class="input-date" value={{this.acquired}}></td>
+                            </tr>
+                            <tr>
+                                <td>Purchase Price</td>
+                                <td><input type="text" id="purchase-price" class="asset-details" value={{this.price}}></td>
+                            </tr>
+                            <tr>
+                                <td>Condition</td>
+                                <td>
+                                    <select id="condition">
+                                        <option value="">Select One</option>
+                                        <option value="New">(1) New</option>
+                                        <option value="New-Open">(2) New - Open Box</option>
+                                        <option value="Manufactured-Refurbished">(3) Manufactured Refurbished</option>
+                                        <option value="Used">(4) Used</option>
+                                        <option value="For-Parts-Not-Working">(5) For Parts or Not Working</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Warrenty Expiration Date</td>
+                                <td><input type="date" id="warrenty-expiration" class="input-date" value={{this.warrenty}}></td>
+                            </tr>
+                            <tr>
+                                <td>Location</td>
+                                <td>
+                                    <select id="location">
+                                        <option value="">Select One</option>
+                                        <option value="Main-Office">Main Office</option>
+                                        <option value="Home-Office">Home Office</option>
+                                        <option value="Unknown">Not Located Yet</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Description</td>
+                                <td><input type="text" id="description-box" class="asset-details" value={{this.description}}></td>
+                            </tr>
+                            <tr>
+                                <td>Comments</td>
+                                <td><input type="text" id="comment-box" class="asset-details" value={{this.comments}}></td>
+                            </tr>
+                            {{/each}}
+                            <tr>
+                                <td>Retire?</td>
+                                <td><input type="checkbox" name="retire" class="checkbox" value="yes">Yes</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div><br>
+                <div class="buttons">
+                    <button type="submit" class="deco-button" id="update-button">Update</button>
+                </div>
+            </form>
+            <p id="message"></p>
+        </div>
         
-    <br><br><hr><br>
+        <br><br><hr><br>
         <footer>
                 CST412: Net Admin<br>
                 &copy; 2019. l33t h@x0r5<br>
@@ -52,5 +109,23 @@
                 It is used for academic purposes only.<br><br>
         </footer>
         <script SRC="/js/functions.js"></script>
+        <script>
+            function openTab(evt, tab) {
+                var i, tabcontent, tablinks;
+                tabcontent = document.getElementsByClassName("tabcontent");
+                for (i = 0; i < tabcontent.length; i++) {
+                    tabcontent[i].style.display = "none";
+                }
+                tablinks = document.getElementsByClassName("tablinks");
+                for (i = 0; i < tablinks.length; i++) {
+                    tablinks[i].className = tablinks[i].className.replace(" active", "");
+                }
+                document.getElementById(tab).style.display = "block";
+            }
+    
+            $(document).ready(function() {
+                openTab(event, 'AssetDetail');
+            });
+        </script>
     </body>
 </html> 

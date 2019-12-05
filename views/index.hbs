@@ -12,10 +12,8 @@
             <button type="submit" class="deco-button" id="new-asset-button">Add New Asset</button>
         </a>
         
-        <br>Enter ID Number to Edit Asset: <input type="text" id="id-number-to-edit">
-        <a href="/show-asset">    
-            <button type="submit" class="deco-button" id="edit-asset-button">Edit Asset</button>
-        </a>
+        <br>Enter ID Number to Edit Asset: <input type="text" id="id">
+        <button type="submit" class="deco-button" id="edit-asset-button">Edit Asset</button>
         <br><br>
         <p id="error-message"></p>
         
@@ -57,5 +55,29 @@
                 It is used for academic purposes only.<br><br>
         </footer>
         <script SRC="/js/functions.js"></script>
+        <script>
+            $(document).ready(function() {
+                $("#edit-asset-button").on("click", function() {
+                    $.ajax({
+                        type: "POST",
+                        url: "/",
+                        dataType: "json",
+                        contentType: "application/json",
+                        data: JSON.stringify({
+                            "idNumber": $("#id").val()
+                        }),
+                        success: function(result, status) {
+                            if (result.successful) {
+                                window.location.href = '/show-asset'; // This will navigate to wherever i say...
+                            } else {
+                                // Show an error message or something and stay here
+                                $('#message').html(result.message).css("color", "red");
+                                $('#message').show();
+                            }
+                        }
+                    });
+                }); 
+            }); 
+        </script>
     </body>
 </html> 
