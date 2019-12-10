@@ -121,12 +121,12 @@ app.get('/show-asset', function(req, res, next) {
 }); 
 
 app.post('/show-asset', function(req, res, next) {
+    let date = new Date();
     let successful = false;
     let message = ""; 
     
     if(req.body.retire == "yes") {
         successful = true; 
-        message = "succesful deletion"; 
         
         const connection = mysql.createConnection({
             host: 'nkpl8b2jg68m87ht.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
@@ -138,8 +138,34 @@ app.post('/show-asset', function(req, res, next) {
         connection.connect();
         
         connection.query(
-        `DELETE FROM assets 
-        WHERE id = ${req.session.idNumber};`
+        `UPDATE assets SET retired = '${date}' WHERE id = '${req.session.idNumber}'`
+        , function(error, results, fields) {
+            if (error) throw error;
+        });
+        
+        connection.end(); 
+        
+        // Return success or failure
+        res.json({
+            successful: successful,
+            message: message
+        });
+    }
+    
+    if(req.body.retire == "no") {
+        successful = true; 
+        
+        const connection = mysql.createConnection({
+            host: 'nkpl8b2jg68m87ht.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
+            user: 'ns0xtj5joo1dl0j9',
+            password: 'oashevj1wpkaemmg',
+            database: 'h2eeztdsfwtqbwbf'
+        });
+        
+        connection.connect();
+        
+        connection.query(
+        `UPDATE assets SET retired = 'N' WHERE id = '${req.session.idNumber}'`
         , function(error, results, fields) {
             if (error) throw error;
         });

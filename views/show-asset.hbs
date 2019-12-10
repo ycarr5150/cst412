@@ -87,11 +87,15 @@
                                 <td>Comments</td>
                                 <td><input type="text" id="comment-box" class="asset-details" value={{this.comments}}></td>
                             </tr>
-                            {{/each}}
                             <tr>
                                 <td>Retire?</td>
-                                <td><input type="checkbox" id="retire-box" class="checkbox">Yes</td>
+                                <td>
+                                    <input type="checkbox" id="retire-box" class="checkbox">Yes
+                                    <input type="checkbox" id="unretire-box" class="checkbox">No
+                                </td>
+                                <td>Retired: {{this.retired}}</td>
                             </tr>
+                            {{/each}}
                         </table>
                     </div>
                 </div><br>
