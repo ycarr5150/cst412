@@ -8,16 +8,18 @@
     <body>
         <h2><i>l33t h@x0r5</i> Asset Inventory</h2>
         
+        {{!-- NEW ASSET BUTTON --}}
         <a href="/new-asset"> 
             <button type="submit" class="deco-button" id="new-asset-button">Add New Asset</button>
         </a>
         
+        {{!-- TO EDIT AN ASSET --}}
         <br>Enter ID Number to Edit Asset: <input type="text" id="id">
         <button type="submit" class="deco-button" id="edit-asset-button">Edit Asset</button>
         <br><br>
-        <p id="message"></p>
+        <span id="message"></span>
         
-        <!-- Display assets here -->
+        {{!-- DISPLAY ASSETS IN OUR INVENTORY --}} 
         <table>
             <tr>
                 <th>ID</th>
@@ -53,6 +55,7 @@
             {{/each}}
         </table>
     
+        {{!-- FOOTER --}}
         <br><br><hr><br>
         <footer>
                 CST412: Net Admin<br>
@@ -60,28 +63,36 @@
                 Disclaimer: The information in this page might be inaccurate.<br>
                 It is used for academic purposes only.<br><br>
         </footer>
-        <script SRC="/js/functions.js"></script>
+        
         <script>
             $(document).ready(function() {
-                $("#edit-asset-button").on("click", function() {
-                    $.ajax({
-                        type: "POST",
-                        url: "/",
-                        dataType: "json",
-                        contentType: "application/json",
-                        data: JSON.stringify({
-                            "idNumber": $("#id").val()
-                        }),
-                        success: function(result, status) {
-                            if (result.successful) {
-                                window.location.href = '/show-asset'; // This will navigate to wherever i say...
-                            } else {
-                                // Show an error message or something and stay here
-                                $('#message').html(result.message).css("color", "red");
-                                $('#message').show();
+                $("#edit-asset-button").on("click", function(e) {
+                    e.preventDefault(); // Do not submit until I am ready
+                    
+                    let idNumber = $("#id").val(); 
+                    
+                    if(idNumber == "") {
+                        $("#message").html("Error, no number typed").css("color", "red"); 
+                    } else {
+                        $.ajax({
+                            type: "POST",
+                            url: "/",
+                            dataType: "json",
+                            contentType: "application/json",
+                            data: JSON.stringify({
+                                "idNumber": idNumber
+                            }),
+                            success: function(result, status) {
+                                if (result.successful) {
+                                    window.location.href = '/show-asset'; // This will navigate to wherever i say...
+                                } else {
+                                    // Show an error message or something and stay here
+                                    $('#message').html(result.message).css("color", "red");
+                                    $('#message').show();
+                                }
                             }
-                        }
-                    });
+                        });
+                    } 
                 }); 
             }); 
         </script>

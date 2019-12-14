@@ -17,6 +17,8 @@ app.use(session({
 
 // routes
 app.get('/', function(req, res, next) {
+    delete req.session.idNumber;
+    
     const connection = mysql.createConnection({
         host: 'nkpl8b2jg68m87ht.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
         user: 'ns0xtj5joo1dl0j9',
@@ -29,30 +31,21 @@ app.get('/', function(req, res, next) {
     connection.query(
         'SELECT * FROM assets', function(error, results, fields) {
         if (error) throw error;
+        connection.end(); 
 
         res.render('index.hbs', {
             item: results
         });
     });
-    
-    connection.end(); 
 });
 
 app.post('/', function(req, res, next) {
-    let successful = false;
-    let message = ""; 
-    
-    if(req.body.idNumber == "") {
-        message = "error, missing number"; 
-    } else {
-        successful = true; 
-        req.session.idNumber = req.body.idNumber; 
-    }
+    req.session.idNumber = req.body.idNumber; 
     
     // Return success or failure
     res.json({
-        successful: successful,
-        message: message
+        successful: true,
+        message: ""
     });
 }); 
 
@@ -112,12 +105,12 @@ app.get('/show-asset', function(req, res, next) {
         `SELECT * FROM assets
         WHERE id = ${req.session.idNumber}`, function(error, results, fields) {
         if (error) throw error;
+        connection.end(); 
 
         res.render('show-asset.hbs', {
             item: results
         });
     });
-    connection.end(); 
 }); 
 
 app.post('/show-asset', function(req, res, next) {
