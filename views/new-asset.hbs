@@ -7,13 +7,17 @@
     </head>
     <body>
         <h2><i>l33t h@x0r5</i> Asset Inventory</h2>
-    
+        
+        {{!-- BACK BUTTON --}}
         <a href="/" id="cancel-asset">Cancel</a>
+        
+        {{!-- TITLE --}}
         <div class="tab">
             <button class="tablinks">Asset Details</button>
         </div>
-        <div id="AssetDetail" class="tabcontent">
-            <br><br>
+        
+        {{!-- ADD NEW ASSET FORM --}}
+        <div id="AssetDetail" class="tabcontent"><br><br>
             <form>
                 <div class="clearfix">
                     <div class="container">
@@ -96,6 +100,14 @@
             </form>
             <p id="message"></p>
         </div>
+        
+        {{!-- FOOTER --}}
+        <br><br><hr><br>
+        <footer>
+            CST412: Net Admin<br> &copy; 2019. l33t h@x0r5<br> 
+            Disclaimer: The information in this page might be inaccurate.<br> 
+            It is used for academic purposes only.<br><br>
+        </footer>
     
         <script>
             function openTab(evt, tab) {
@@ -114,15 +126,49 @@
             $(document).ready(function() {
                 openTab(event, 'AssetDetail');
             });
+            
+            $('#submit-button').on("click", function(e) {
+                e.preventDefault(); // Do not submit until I am ready
+                
+                if($('#category').val() == "" || $('#manufacturer').val() == "" || $('#model').val() == "" ||
+                $('#serial-number').val() == "" || $('#acquired-date').val() == "" || $('#purchase-price').val() == "" ||
+                $('#condition').val() == "" || $('#warrenty-expiration').val() == "" || $('#location').val() == "") {
+                    $("#message").html("Error, missing selection above").css("color", "red"); 
+                } else {
+                    $.ajax({
+                        type: "POST",
+                        url: "/new-asset",
+                        dataType: "json",
+                        contentType: "application/json",
+                        data: JSON.stringify({
+                            "category" : $('#category').val(), 
+                            "manufacturer" : $('#manufacturer').val(), 
+                            "model" : $('#model').val(), 
+                            "serial" :$('#serial-number').val(), 
+                            "acquired" : $('#acquired-date').val(), 
+                            "paid" : $('#purchase-price').val(), 
+                            "condition" : $('#condition').val(), 
+                            "warrenty" : $('#warrenty-expiration').val(), 
+                            "located" : $('#location').val(), 
+                            "descrip" : $('#description-box').val(), 
+                            "comment" : $('#comment-box').val()
+                        }),
+                        success: function(result, status) {
+                            if (result.successful) {
+                                window.location.href = '/'; // This will navigate to wherever i say...
+                            }
+                            else {
+                                // Show an error message or something and stay here
+                                $('#message').html(result.message).css("color", "red");
+                                $('#message').show();
+                            }
+                        }, 
+                        error: function(xhr, status, message) {
+                            console.log("error: ", xhr.responseText); 
+                        }
+                    });
+                }
+            }); 
         </script>
-    
-        <br><br>
-        <hr><br>
-        <footer>
-            CST412: Net Admin<br> &copy; 2019. l33t h@x0r5<br> 
-            Disclaimer: The information in this page might be inaccurate.<br> 
-            It is used for academic purposes only.<br><br>
-        </footer>
-        <script SRC="/js/functions.js"></script>
     </body>
 </html>
